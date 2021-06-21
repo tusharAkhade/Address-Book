@@ -5,36 +5,38 @@ import java.util.Scanner;
  * Getting input from user and set that input in the constructor
  * And adding contact to address book
  * And editing person details
- * And deleting the contact
+ * Adding multiple contact details
  * @author Tushar Akhade
  * @since 17 Jun 2021
  * @version 1.0
  */
+
 public class AddressBookSystem {
     static Scanner scanner = new Scanner(System.in);
     static ArrayList<Contact> contactArrayList = new ArrayList<Contact>();
 
     public static void main(String[] args) {
 
-        Contact contact = new Contact();
-        System.out.println("Press 1 - Add contact\nPress 2 - Edit Contact\nPress 3 - Delete contact");
-        int choice = scanner.nextInt();
-
-        switch (choice) {
-            case 1:
-                addContact(contact, contactArrayList);
-                break;
-            case 2:
-                editContact(contact);
-                break;
-            case 3:
-                deleteContact(contact);
-            default:
-                System.out.println("Invalid input");
+        boolean flag = true;
+        while (flag) {
+            Contact contact = new Contact();
+            System.out.println("Press 1 - Add contact\nPress 2 - Edit Contact\nPress 3 - Delete contact");
+            int choice = scanner.nextInt();
+            switch (choice) {
+                case 1:
+                    addContact(contact, contactArrayList);
+                    break;
+                case 2:
+                    editContact(contact);
+                    break;
+                case 3:
+                    deleteContact(contact);
+                    break;
+                default:
+                    flag = false;
+                    System.out.println("Invalid input");
+            }
         }
-
-
-
     }
 
     // adding contact to the address book
