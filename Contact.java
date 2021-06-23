@@ -1,10 +1,10 @@
-public class Contact {
+public class Person {
     String firstName, lastName, address, city, state, email;
     long phoneNumber, zipCode;
 
-    public Contact() {}
+    public Person() {}
 
-    public Contact(String firstName, String lastName, String address, String city, String state, String email, long phoneNumber, long zipCode) {
+    public Person(String firstName, String lastName, String address, String city, String state, String email, long phoneNumber, long zipCode) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
