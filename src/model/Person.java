@@ -1,3 +1,8 @@
+package model;
+
+/**
+ * Getter and setters define here
+ */
 public class Person {
     String firstName, lastName, address, city, state, email;
     long phoneNumber, zipCode;
