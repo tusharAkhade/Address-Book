@@ -3,6 +3,8 @@ package controller;
 import model.Person;
 import service.AddressBookService;
 import service.AddressBookServiceInterface;
+import service.PersonService;
+import service.PersonServiceInterface;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,10 +23,12 @@ public class AddressBookSystem {
     public static void main(String[] args) {
         HashMap<String, ArrayList<Person>> addressBook = new HashMap<String, ArrayList<Person>>();
         AddressBookServiceInterface addressBookServiceInterface = new AddressBookService();
+        PersonServiceInterface personServiceInterface = new PersonService();
 
         boolean flag = true;
         while (flag) {
-            System.out.println("Press 1 to Create new Address book\nPress 2 to edit address books\nPress 3 to view all the address books names.\nPress 4 to Exit");
+            System.out.println("Press 1 to Create new Address book\nPress 2 to edit address books" +
+                    "\nPress 3 to view all the address books names.\nPress 4 to view all the person.\nPress 5 to Exit");
             int op = scanner.nextInt();
             switch (op) {
                 case 1:
@@ -42,6 +46,9 @@ public class AddressBookSystem {
                     break;
                 case 3:
                     addressBookServiceInterface.viewAddressBook(addressBook);
+                    break;
+                case 4:
+                    addressBookServiceInterface.searchPersonByCityOrState(addressBook);
                     break;
                 default:
                     flag = false;
