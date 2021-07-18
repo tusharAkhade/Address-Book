@@ -1,13 +1,6 @@
 package service;
-
 import model.Person;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Scanner;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.*;
 
 /**
  * Add, read and view operation on address book
@@ -112,36 +105,56 @@ public class AddressBookService implements AddressBookServiceInterface {
     }
 
     /**
-     * Searching Person in a City or State across multiple address book
+     * View all Person in particular City or State across multiple address book
      * @param addressBooks contain multiple address book
      */
     @Override
     public void searchPersonByCityOrState(HashMap<String, ArrayList<Person>> addressBooks) {
-        List addressBookList = addressBooks.values().stream().collect(Collectors.toList());
-        System.out.println("Press 1 to search persons by city\nPress 2 to search persons by state");
+        Dictionary<String, ArrayList<String>> personsByCity = new Hashtable();
+        Dictionary<String, ArrayList<String>> personsByState = new Hashtable();
+        System.out.println("Press 1 to view persons in particular city\nPress 2 to view persons in particular state");
         int choice = scanner.nextInt();
         if (choice == 1) {
+            ArrayList<String> personArrayList = new ArrayList<>();
             System.out.println("Enter a city name : ");
             String cityName = scanner.next();
-            System.out.println("People from " + cityName.toUpperCase() + " are : ");
-            for (HashMap.Entry<String, ArrayList<Person>> set : addressBooks.entrySet()) {
-                for (int j = 0; j<set.getValue().size(); j++) {
-                    if (set.getValue().get(j).getCity().equals(cityName)) {
-                        System.out.println("Person name : " + set.getValue().get(j).getFirstName() + " " + set.getValue().get(j).getLastName());
+            System.out.println("People from " + cityName.toUpperCase() + " city are : ");
+            for (HashMap.Entry<String, ArrayList<Person>> addressBook : addressBooks.entrySet()) {
+                for (int j = 0; j<addressBook.getValue().size(); j++) {
+                    if (addressBook.getValue().get(j).getCity().equals(cityName)) {
+                        String personName = addressBook.getValue().get(j).getFirstName() + " " + addressBook.getValue().get(j).getLastName();
+                        personArrayList.add(personName);
+                        personsByCity.put(cityName, personArrayList);
                     }
                 }
             }
-        } else if (choice == 2) {
+            Enumeration<String> setOfKeys = personsByCity.keys();
+            while (setOfKeys.hasMoreElements()) {
+                String person = setOfKeys.nextElement();
+                System.out.println(personsByCity.get(person));
+            }
+            System.out.println();
+        }
+        else if (choice == 2) {
+            ArrayList<String> personArrayList = new ArrayList<>();
             System.out.println("Enter a state name : ");
             String stateName = scanner.next();
-            System.out.println("People from " + stateName.toUpperCase() + " are : ");
-            for (HashMap.Entry<String, ArrayList<Person>> set : addressBooks.entrySet()) {
-                for (int j = 0; j<set.getValue().size(); j++) {
-                    if (set.getValue().get(j).getState().equals(stateName)) {
-                        System.out.println("Person name : " + set.getValue().get(j).getFirstName() + " " + set.getValue().get(j).getLastName());
+            System.out.println("People from " + stateName.toUpperCase() + " state are : ");
+            for (HashMap.Entry<String, ArrayList<Person>> addressBook : addressBooks.entrySet()) {
+                for (int j = 0; j<addressBook.getValue().size(); j++) {
+                    if (addressBook.getValue().get(j).getState().equals(stateName)) {
+                        String personName = addressBook.getValue().get(j).getFirstName() + " " + addressBook.getValue().get(j).getLastName();
+                        personArrayList.add(personName);
+                        personsByState.put(stateName, personArrayList);
                     }
                 }
             }
+            Enumeration<String> setOfKeys = personsByState.keys();
+            while (setOfKeys.hasMoreElements()) {
+                String person = setOfKeys.nextElement();
+                System.out.println(personsByState.get(person));
+            }
+            System.out.println();
         }
     }
 }
