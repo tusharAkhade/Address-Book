@@ -112,12 +112,13 @@ public class AddressBookService implements AddressBookServiceInterface {
     public void searchPersonByCityOrState(HashMap<String, ArrayList<Person>> addressBooks) {
         Dictionary<String, ArrayList<String>> personsByCity = new Hashtable();
         Dictionary<String, ArrayList<String>> personsByState = new Hashtable();
-        System.out.println("Press 1 to view persons in particular city\nPress 2 to view persons in particular state");
+        System.out.println("Press 1 to view and count persons in particular city\nPress 2 to view and count persons in particular state");
         int choice = scanner.nextInt();
         if (choice == 1) {
             ArrayList<String> personArrayList = new ArrayList<>();
             System.out.println("Enter a city name : ");
             String cityName = scanner.next();
+            int personCountInCity = 0;
             System.out.println("People from " + cityName.toUpperCase() + " city are : ");
             for (HashMap.Entry<String, ArrayList<Person>> addressBook : addressBooks.entrySet()) {
                 for (int j = 0; j<addressBook.getValue().size(); j++) {
@@ -125,6 +126,7 @@ public class AddressBookService implements AddressBookServiceInterface {
                         String personName = addressBook.getValue().get(j).getFirstName() + " " + addressBook.getValue().get(j).getLastName();
                         personArrayList.add(personName);
                         personsByCity.put(cityName, personArrayList);
+                        personCountInCity++;
                     }
                 }
             }
@@ -133,12 +135,14 @@ public class AddressBookService implements AddressBookServiceInterface {
                 String person = setOfKeys.nextElement();
                 System.out.println(personsByCity.get(person));
             }
+            System.out.println("Number of Person in " + cityName.toUpperCase() + " : " + personCountInCity);
             System.out.println();
         }
         else if (choice == 2) {
             ArrayList<String> personArrayList = new ArrayList<>();
             System.out.println("Enter a state name : ");
             String stateName = scanner.next();
+            int personCountInState = 0;
             System.out.println("People from " + stateName.toUpperCase() + " state are : ");
             for (HashMap.Entry<String, ArrayList<Person>> addressBook : addressBooks.entrySet()) {
                 for (int j = 0; j<addressBook.getValue().size(); j++) {
@@ -146,6 +150,7 @@ public class AddressBookService implements AddressBookServiceInterface {
                         String personName = addressBook.getValue().get(j).getFirstName() + " " + addressBook.getValue().get(j).getLastName();
                         personArrayList.add(personName);
                         personsByState.put(stateName, personArrayList);
+                        personCountInState++;
                     }
                 }
             }
@@ -154,7 +159,10 @@ public class AddressBookService implements AddressBookServiceInterface {
                 String person = setOfKeys.nextElement();
                 System.out.println(personsByState.get(person));
             }
+            System.out.println("Number of Person in " + stateName.toUpperCase() + " : " + personCountInState);
             System.out.println();
         }
     }
+
+
 }
