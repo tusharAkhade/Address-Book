@@ -6,7 +6,6 @@ import java.util.stream.Collectors;
 /**
  * Add, read and view operation on address book
  * And View all Person in particular City or State across multiple address book
- * And also printing sorted Person entries in address book alphabetically by Person's first name
  */
 public class AddressBookService implements AddressBookServiceInterface {
     Scanner scanner = new Scanner(System.in);
@@ -167,17 +166,4 @@ public class AddressBookService implements AddressBookServiceInterface {
         }
     }
 
-    /**
-     * Printing all the sorted Person entries in address book alphabetically by Person's first name
-     * @param addressBooks
-     */
-    @Override
-    public void sortByPersonName(HashMap<String, ArrayList<Person>> addressBooks) {
-        addressBooks.keySet().forEach(entry -> {
-            List<Person> person = addressBooks.get(entry)
-                    .stream().sorted(Comparator.comparing(Person::getFirstName))
-                    .collect(Collectors.toList());
-            System.out.println(person);
-        });
-    }
 }

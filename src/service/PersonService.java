@@ -2,11 +2,13 @@ package service;
 
 import model.Person;
 
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Performing a CRED operation on person
+ * And printing sorted Person entries in address book alphabetically by Person's first name
+ * And also printing sorted entries in address book by City, State or Zip.
  */
 public class PersonService implements PersonServiceInterface {
     static Scanner scanner = new Scanner(System.in);
@@ -140,5 +142,61 @@ public class PersonService implements PersonServiceInterface {
             System.out.println(c.getFirstName() + " " + c.getLastName() + " " + c.getAddress() + " " + c.getCity() + " " + c.getState() + " "  + c.getZipCode()
                     + " " + c.getPhoneNumber() + " " + c.getEmail());
         }
+    }
+
+    /**
+     * Printing all the sorted Person entries in address book alphabetically by Person's first name
+     * @param addressBooks
+     */
+    @Override
+    public void sortPersonByName(HashMap<String, ArrayList<Person>> addressBooks) {
+        addressBooks.keySet().forEach(entry -> {
+            List<Person> persons = addressBooks.get(entry)
+                    .stream().sorted(Comparator.comparing(Person::getFirstName))
+                    .collect(Collectors.toList());
+            System.out.println(persons);
+        });
+    }
+
+    /**
+     * Printing all the sorted Person entries in address book by Person's State
+     * @param addressBooks
+     */
+    @Override
+    public void sortPersonByState(HashMap<String, ArrayList<Person>> addressBooks) {
+        addressBooks.keySet().forEach(entry -> {
+            List<Person> persons = addressBooks.get(entry)
+                    .stream().sorted(Comparator.comparing(Person::getState))
+                    .collect(Collectors.toList());
+            System.out.println(persons);
+        });
+    }
+
+    /**
+     * Printing all the sorted Person entries in address book by Person's City
+     * @param addressBooks
+     */
+    @Override
+    public void sortPersonByCity(HashMap<String, ArrayList<Person>> addressBooks) {
+        addressBooks.keySet().forEach(entry -> {
+            List<Person> persons = addressBooks.get(entry)
+                    .stream().sorted(Comparator.comparing(Person::getCity))
+                    .collect(Collectors.toList());
+            System.out.println(persons);
+        });
+    }
+
+    /**
+     * Printing all the sorted Person entries in address book by Person's Zip code
+     * @param addressBooks
+     */
+    @Override
+    public void sortPersonByZip(HashMap<String, ArrayList<Person>> addressBooks) {
+        addressBooks.keySet().forEach(entry -> {
+            List<Person> persons = addressBooks.get(entry)
+                    .stream().sorted(Comparator.comparing(Person::getZipCode))
+                    .collect(Collectors.toList());
+            System.out.println(persons);
+        });
     }
 }

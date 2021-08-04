@@ -10,5 +10,4 @@ public interface AddressBookServiceInterface {
     public abstract void editAddressBook(HashMap<String, ArrayList<Person>> addressBook, String companyName, ArrayList<Person> personArrayList);
     public abstract void viewAddressBook(HashMap<String, ArrayList<Person>> addressBook);
     public abstract void searchPersonByCityOrState(HashMap<String, ArrayList<Person>> addressBook);
-    public abstract void sortByPersonName(HashMap<String, ArrayList<Person>> addressBooks);
 }
